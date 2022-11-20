@@ -43,7 +43,7 @@ public class PatientDao extends Patient {
             PreparedStatement smt = con.prepareStatement(sql);
             ResultSet rs;
 
-            rs = smt.executeQuery(); // Executa Comando no SQL e rs recebe os valores
+            rs = smt.executeQuery(); // Executa Comando no SQL e rs recebe os valores.
 
             if(rs!=null){
                 while(rs.next()){
