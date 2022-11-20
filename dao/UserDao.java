@@ -15,7 +15,7 @@ public class UserDao extends User {
                     "VALUES (?,?,?,?,?,?)";
 
         try{
-            Connection con = new ConnectionFactory().getConnection();
+            Connection con = ConnectionFactory.getConnection();
             PreparedStatement smt = con.prepareStatement(sql);
 
                 smt.setString(1, login);
@@ -33,6 +33,7 @@ public class UserDao extends User {
     }
 
     public List<model.User> getAll(){
+        List<model.User> users = null;
         String sql = "SELECT *" +
                     "FROM USR";
 
@@ -40,10 +41,9 @@ public class UserDao extends User {
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement smt = con.prepareStatement(sql);
             ResultSet rs;
-            List<model.User> users = null;
 
             rs = smt.executeQuery(); // Executa Comando no SQL e rs recebe os valores
-            
+
             if(rs!=null){
                 while(rs.next()){
                     model.User u = new User();
@@ -61,8 +61,10 @@ public class UserDao extends User {
             smt.close(); // Finaliza o PreparedStatement
             con.close(); // Finaliza a Conexão com o BD
         } catch (SQLException e){
-            System.out.println("Error ao Registrar o Usuario!");
+            System.out.println("Error ao Buscar Todos os Usuarios!");
         }
+
+        return users;
     }
 
 }
